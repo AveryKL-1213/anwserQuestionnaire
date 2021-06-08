@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/userLogin", method = RequestMethod.POST, headers = "Accept = application/json")
+    @RequestMapping(value = "/userLogin", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity userLogin(@RequestBody Map<String, Object> map) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         String username = map.get("username").toString();

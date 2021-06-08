@@ -11,7 +11,6 @@ public class UserService {
     private UserEntityMapper userEntityMapper;
 
     public UserEntity selectAllByName(String username) {
-
         UserEntity hasUser = userEntityMapper.selectAllByName(username);
         return hasUser;
     }
