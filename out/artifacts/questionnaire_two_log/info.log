@@ -1,0 +1,24 @@
+2021-06-08 15:49:56.283 [main] INFO  c.a.q.QuestionnairewebadminApplication -Starting QuestionnairewebadminApplication on Avery-xps15 with PID 9876 (started by avery in D:\Java Project\anwserQuestionnaire\out\artifacts\questionnairewebadmin_jar)
+2021-06-08 15:49:56.285 [main] INFO  c.a.q.QuestionnairewebadminApplication -No active profile set, falling back to default profiles: default
+2021-06-08 15:49:56.317 [main] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4a7f959b: startup date [Tue Jun 08 15:49:56 CST 2021]; root of context hierarchy
+2021-06-08 15:49:57.009 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$a6527aa5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-08 15:49:57.431 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2021-06-08 15:49:57.659 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader -Root WebApplicationContext: initialization completed in 1342 ms
+2021-06-08 15:49:57.822 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2021-06-08 15:49:57.826 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2021-06-08 15:49:57.827 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2021-06-08 15:49:57.827 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2021-06-08 15:49:57.827 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2021-06-08 15:49:57.827 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'corsFilter' to: [/*]
+2021-06-08 15:54:32.745 [main] INFO  c.a.q.QuestionnairewebadminApplication -Starting QuestionnairewebadminApplication on Avery-xps15 with PID 13936 (started by avery in D:\Java Project\anwserQuestionnaire\out\artifacts\questionnairewebadmin_jar)
+2021-06-08 15:54:32.747 [main] INFO  c.a.q.QuestionnairewebadminApplication -No active profile set, falling back to default profiles: default
+2021-06-08 15:54:32.778 [main] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4a7f959b: startup date [Tue Jun 08 15:54:32 CST 2021]; root of context hierarchy
+2021-06-08 15:54:33.550 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$a6527aa5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-08 15:54:33.957 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer -Tomcat initialized with port(s): 8080 (http)
+2021-06-08 15:54:34.139 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader -Root WebApplicationContext: initialization completed in 1362 ms
+2021-06-08 15:54:34.307 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean -Servlet dispatcherServlet mapped to [/]
+2021-06-08 15:54:34.312 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'characterEncodingFilter' to: [/*]
+2021-06-08 15:54:34.313 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2021-06-08 15:54:34.313 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2021-06-08 15:54:34.313 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'requestContextFilter' to: [/*]
+2021-06-08 15:54:34.314 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean -Mapping filter: 'corsFilter' to: [/*]
