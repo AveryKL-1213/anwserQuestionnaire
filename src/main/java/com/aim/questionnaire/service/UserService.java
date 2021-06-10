@@ -6,9 +6,7 @@ import com.aim.questionnaire.dao.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -20,8 +18,20 @@ public class UserService {
         return hasUser;
     }
 
-    public void insertUserInfo(UserEntity userEntity){
-        userEntityMapper.insertUserInfo(userEntity);
+    public int insertUserInfo(UserEntity userEntity){
+        String id = UUID.randomUUID().toString().replaceAll("-","");
+        String user = userEntity.getCreatedBy();
+        userEntity.setId(id);
+        //获取用户信息
+        userEntity.setCreatedBy(user);
+        userEntity.setLastUpdatedBy(user);
+        // 获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        userEntity.setCreationDate(date);
+        userEntity.setLastUpdateDate(date);
+
+        int result = userEntityMapper.insertSelective(userEntity);
+        return result;
     }
 
 }
