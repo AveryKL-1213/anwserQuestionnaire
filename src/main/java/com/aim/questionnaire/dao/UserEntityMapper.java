@@ -13,4 +13,6 @@ public interface UserEntityMapper {
      */
     UserEntity selectAllByName(String username);
 
+    void insertUserInfo(UserEntity userEntity);
+
 }
