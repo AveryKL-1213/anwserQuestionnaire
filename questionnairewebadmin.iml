@@ -93,14 +93,6 @@
     <orderEntry type="library" name="Maven: redis.clients:jedis:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis.caches:mybatis-redis:1.0.0-beta2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-core:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-web:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-ehcache:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache-core:2.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-spring:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.crazycake:shiro-redis:2.4.2.1-RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-redis:2.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:2.0.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-keyvalue:2.0.9.RELEASE" level="project" />
@@ -133,5 +125,6 @@
     <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.2.1" level="project" />
     <orderEntry type="library" name="Maven: c3p0:c3p0:0.9.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
   </component>
 </module>
