@@ -40,11 +40,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addUserInfo", method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity addUser(@RequestBody Map<String, Object> map){
+    public HttpResponseEntity addUserInfo(@RequestBody Map<String, Object> map){
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         String username = map.get("username").toString();
         String password = map.get("password").toString();
-//        String role = map.get("roleId").toString();
         Date start_time = new Date(Long.parseLong(map.get("startTime").toString()));
         Date end_time = new Date(Long.parseLong(map.get("stopTime").toString()));
         UserEntity userEntity = new UserEntity();
@@ -54,7 +53,6 @@ public class UserController {
         userEntity.setPassword(password);
         userEntity.setStartTime(start_time);
         userEntity.setStopTime(end_time);
-//        userEntity.setRoleId(role);
         userEntity.setStatus("1");
         userEntity.setCreatedBy("admin");
         Date date = new Date(System.currentTimeMillis());
