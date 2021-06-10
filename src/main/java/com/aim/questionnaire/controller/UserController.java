@@ -41,10 +41,8 @@ public class UserController {
 
     @RequestMapping(value = "/addUserInfo", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity addUserInfo(@RequestBody UserEntity userEntity) {
-
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         int result = userService.insertUserInfo(userEntity);
-
         httpResponseEntity.setData(result);
         httpResponseEntity.setCode(Constans.SUCCESS_CODE);
         httpResponseEntity.setMessage(Constans.ADD_MESSAGE);
