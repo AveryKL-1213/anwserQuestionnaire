@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addUserInfo", method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity addUserInfo(@RequestBody Map<String, Object> map){
+    public HttpResponseEntity addUser(@RequestBody Map<String, Object> map){
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         String username = map.get("username").toString();
         String password = map.get("password").toString();
