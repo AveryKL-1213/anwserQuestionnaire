@@ -52,10 +52,8 @@ public class UserController {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
 
         String username = map.get("userName").toString();
-        int pageNumber = Integer.parseInt(map.get("pageNum").toString());
-        int pageSize = Integer.parseInt(map.get("pageSize").toString());
         List<Object> userEntityList = userService.queryUserByName(username);
-        Map<String,Object> userMap = new HashMap<String,Object>();
+        Map<String,Object> userMap = new HashMap<>();
         userMap.put("list",userEntityList);
         userMap.put("total",userEntityList.size());
         if(userEntityList.size()!= 0) {
