@@ -14,12 +14,11 @@ public class UserService {
     private UserEntityMapper userEntityMapper;
 
     public UserEntity selectAllByName(String username) {
-        UserEntity hasUser = userEntityMapper.selectAllByName(username);
-        return hasUser;
+        return userEntityMapper.selectAllByName(username);
     }
 
-    public int insertUserInfo(UserEntity userEntity){
-        String id = UUID.randomUUID().toString().replaceAll("-","");
+    public int insertUserInfo(UserEntity userEntity) {
+        String id = UUID.randomUUID().toString().replaceAll("-", "");
         String user = "admin";
         userEntity.setId(id);
 //        userEntity.setStatus(null);
@@ -31,8 +30,11 @@ public class UserService {
         userEntity.setCreationDate(date);
         userEntity.setLastUpdateDate(date);
 
-        int result = userEntityMapper.insertSelective(userEntity);
-        return result;
+        return userEntityMapper.insertSelective(userEntity);
+    }
+
+    public List<Object> queryUserByName(String username) {
+        return userEntityMapper.queryUserByName(username);
     }
 
 }

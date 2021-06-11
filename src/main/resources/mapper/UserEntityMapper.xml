@@ -208,4 +208,15 @@
                 #{lastUpdateDate,jdbcType=TIMESTAMP})
     </insert>
 
+    <select id="queryAllUserInfo" resultMap="BaseResultMap">
+        SELECT *
+        FROM user_info
+    </select>
+
+    <select id="queryUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT *
+        FROM user_info
+        WHERE username like "%"#{username,jdbcType = VARCHAR}"%"
+    </select>
+
 </mapper>
