@@ -20,8 +20,9 @@ public class UserService {
 
     public int insertUserInfo(UserEntity userEntity){
         String id = UUID.randomUUID().toString().replaceAll("-","");
-        String user = userEntity.getCreatedBy();
+        String user = "admin";
         userEntity.setId(id);
+//        userEntity.setStatus(null);
         //获取用户信息
         userEntity.setCreatedBy(user);
         userEntity.setLastUpdatedBy(user);
