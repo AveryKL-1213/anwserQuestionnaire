@@ -161,11 +161,8 @@ function addUserFromFile() {
 }
 
 function getFilePath() {
-
     var file = $("#getUserFile")[0].files[0];
-    //放到img控件上，借助于filereader 中间的东西，文件阅读器
-    //生成一个文件阅读器对象赋值给filereader
-    var name = file.name; //读取选中文件的文件名
+    var name = file.name;
     var size = file.size;
     var type = file.type;
     if (type != "application/json")
@@ -174,7 +171,6 @@ function getFilePath() {
         var reader = new FileReader(); //这是核心,读取操作就是由它完成.
         reader.readAsText(file); //读取文件的内容,也可以读取文件的URL
         reader.onload = function () {
-            //当读取完成后回调这个函数,然后此时文件的内容存储到了result中,直接操作即可
             var userListJSON = JSON.parse(this.result);
             var jsLength = 0;
             for (var js2 in userListJSON) {
@@ -213,6 +209,18 @@ function getFilePath() {
             })
         }
     }
+}
+
+function downLoadUserList() {
+    var url = '/admin/selectUserListToExcel';
+    commonAjaxPost(true, url, "", function (result) {
+        if (result.code == "666") {
+            alert("文件保存在：" + result.data);
+            layer.msg("导出成功", {icon: 1});
+        }
+    })
+
+
 }
 
 // 表格中按钮
