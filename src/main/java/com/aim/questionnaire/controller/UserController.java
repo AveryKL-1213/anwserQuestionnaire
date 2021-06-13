@@ -67,4 +67,16 @@ public class UserController {
         }
         return httpResponseEntity;
     }
+
+    @RequestMapping(value = "/addUserInfoList", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity addUserInfoList(@RequestBody List<UserEntity> userEntityList) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        int result = 0;
+        for (UserEntity userEntity : userEntityList)
+            result = userService.insertUserInfo(userEntity);
+        httpResponseEntity.setData(result);
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setMessage(Constans.ADD_MESSAGE);
+        return httpResponseEntity;
+    }
 }

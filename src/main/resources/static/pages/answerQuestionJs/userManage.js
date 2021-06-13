@@ -95,7 +95,7 @@ function TableInit() {
                 }],
             responseHandler: function (res) {
                 //console.log(res);
-                if(res.code == "666"){
+                if (res.code == "666") {
                     var userInfo = res.data.list;
                     var NewData = [];
                     if (userInfo.length) {
@@ -112,8 +112,8 @@ function TableInit() {
                             dataNewObj.id = userInfo[i].id;
                             dataNewObj.username = userInfo[i].username;
                             dataNewObj.password = userInfo[i].password;
-                            dataNewObj.startTime = userInfo[i].startTime.replace(/-/g,'/');
-                            dataNewObj.endTime = userInfo[i].stopTime.replace(/-/g,'/');
+                            dataNewObj.startTime = userInfo[i].startTime.replace(/-/g, '/');
+                            dataNewObj.endTime = userInfo[i].stopTime.replace(/-/g, '/');
                             dataNewObj.status = userInfo[i].status;
                             NewData.push(dataNewObj);
                         }
@@ -156,10 +156,64 @@ window.operateEvents = {
     }
 };
 
-function addUserFromFile(){
-
+function addUserFromFile() {
+    $("#getUserFile").trigger("click");
 }
 
+function getFilePath() {
+
+    var file = $("#getUserFile")[0].files[0];
+    //放到img控件上，借助于filereader 中间的东西，文件阅读器
+    //生成一个文件阅读器对象赋值给filereader
+    var name = file.name; //读取选中文件的文件名
+    var size = file.size;
+    var type = file.type;
+    if (type != "application/json")
+        layer.msg("文件类型错误[.xlsx]", {icon: 2});
+    else {
+        var reader = new FileReader(); //这是核心,读取操作就是由它完成.
+        reader.readAsText(file); //读取文件的内容,也可以读取文件的URL
+        reader.onload = function () {
+            //当读取完成后回调这个函数,然后此时文件的内容存储到了result中,直接操作即可
+            var userListJSON = JSON.parse(this.result);
+            var jsLength = 0;
+            for (var js2 in userListJSON) {
+                jsLength++;
+            }
+            // for (var i = 0; i < jsLength; i++)
+            //     console.log(userListJSON[i].username + " " + userListJSON[i].password);
+            var userList = new Array();
+            for (var i = 0; i < jsLength; i++) {
+                var data = {
+                    "username": userListJSON[i].username,
+                    "password": userListJSON[i].password,
+                    "startTime": dateChange(userListJSON[i].startTime),
+                    "stopTime": dateChange(userListJSON[i].stopTime)
+                };
+                userList[i] = data;
+            }
+            var url = '/admin/addUserInfoList';
+            commonAjaxPost(true, url, userList, function (result) {
+                if (result.code == "666") {
+                    layer.msg("用户批量导入成功", {icon: 1});
+                    setTimeout(function () {
+                        window.location.href = 'userManage.html';
+                    }, 1000)
+                } else if (result.code == "50003") {
+                    //用户名已存在
+                    layer.msg(result.message, {icon: 2});
+                } else if (result.code == "333") {
+                    layer.msg(result.message, {icon: 2});
+                    setTimeout(function () {
+                        window.location.href = 'login.html';
+                    }, 1000)
+                } else {
+                    layer.msg(result.message, {icon: 2});
+                }
+            })
+        }
+    }
+}
 
 // 表格中按钮
 function addFunctionAlty(value, row, index) {
@@ -201,6 +255,7 @@ function editUserPage() {
 
     alert("编辑用户")
 }
+
 // 修改用户状态（禁用、开启）
 function changeStatus(index) {
 
