@@ -156,6 +156,10 @@ window.operateEvents = {
     }
 };
 
+function addUserFromFile(){
+
+}
+
 
 // 表格中按钮
 function addFunctionAlty(value, row, index) {

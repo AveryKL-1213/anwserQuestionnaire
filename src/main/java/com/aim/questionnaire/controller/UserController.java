@@ -31,7 +31,7 @@ public class UserController {
             httpResponseEntity.setMessage("登陆成功");
         } else {
             httpResponseEntity.setData(hasUser);
-            httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+            httpResponseEntity.setCode(Constans.EXIST_CODE);
             httpResponseEntity.setMessage("密码错误");
         }
         return httpResponseEntity;
@@ -53,10 +53,10 @@ public class UserController {
 
         String username = map.get("userName").toString();
         List<Object> userEntityList = userService.queryUserByName(username);
-        Map<String,Object> userMap = new HashMap<>();
-        userMap.put("list",userEntityList);
-        userMap.put("total",userEntityList.size());
-        if(userEntityList.size()!= 0) {
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("list", userEntityList);
+        userMap.put("total", userEntityList.size());
+        if (userEntityList.size() != 0) {
             httpResponseEntity.setData(userMap);
             httpResponseEntity.setCode(Constans.SUCCESS_CODE);
             httpResponseEntity.setMessage("查询成功");
