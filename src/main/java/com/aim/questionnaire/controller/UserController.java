@@ -87,7 +87,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/selectUserListToExcel", method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity selectUserListToExcel() {
+    public HttpResponseEntity selectUserListToExcel(@RequestBody String temp) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         // excel标题
         String[] title = {"id", "username", "password", "startTime", "stopTime", "status", "createdBy", "creationDate", "lastUpdateBy", "lastUpdateDate"};
