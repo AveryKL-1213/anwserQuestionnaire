@@ -6,6 +6,7 @@ import com.aim.questionnaire.common.Constans;
 import com.aim.questionnaire.common.utils.ExcelUtil;
 import com.aim.questionnaire.dao.entity.UserEntity;
 import com.aim.questionnaire.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -75,11 +78,34 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addUserInfoList", method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity addUserInfoList(@RequestBody List<UserEntity> userEntityList) {
+    public HttpResponseEntity addUserInfoList(@RequestBody Map<String, Object> userListMap) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         int result = 0;
-        for (UserEntity userEntity : userEntityList)
+        List<Object> userList = (List<Object>) userListMap.get("userList");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd H:mm:ss");
+        for (int i = 0; i < userList.size(); i++) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            UserEntity ue = objectMapper.convertValue(userList.get(i), UserEntity.class);
+            UserEntity userEntity = new UserEntity();
+            if (ue.startTimeStr == null || ue.startTimeStr.equals(""))
+                userEntity.setStartTime(ue.getStartTime());
+            else {
+                Date startTime = sdf.parse(ue.startTimeStr, new ParsePosition(0));
+                userEntity.setStartTime(startTime);
+            }
+            if (ue.stopTimeStr == null || ue.stopTimeStr.equals("")) {
+                userEntity.setStopTime(ue.getStopTime());
+            } else {
+                Date stopTime = sdf.parse(ue.stopTimeStr, new ParsePosition(0));
+                userEntity.setStopTime(stopTime);
+            }
+            if (ue.userName == null || ue.userName.equals(""))
+                userEntity.setUsername(ue.getUsername());
+            else
+                userEntity.setUsername(ue.userName);
+            userEntity.setPassword(ue.getPassword());
             result = userService.insertUserInfo(userEntity);
+        }
         httpResponseEntity.setData(result);
         httpResponseEntity.setCode(Constans.SUCCESS_CODE);
         httpResponseEntity.setMessage(Constans.ADD_MESSAGE);

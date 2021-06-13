@@ -189,7 +189,10 @@ function getFilePath() {
                 userList[i] = data;
             }
             var url = '/admin/addUserInfoList';
-            commonAjaxPost(true, url, userList, function (result) {
+            var mapData = {
+                "userList": userList
+            }
+            commonAjaxPost(true, url, mapData, function (result) {
                 if (result.code == "666") {
                     layer.msg("用户批量导入成功", {icon: 1});
                     setTimeout(function () {
