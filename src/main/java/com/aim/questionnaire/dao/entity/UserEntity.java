@@ -9,7 +9,6 @@ public class UserEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     public String startTimeStr;
     public String stopTimeStr;
-    public Date endTime;
     public String userName;
     /**
      *
