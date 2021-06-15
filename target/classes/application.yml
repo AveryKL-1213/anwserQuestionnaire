@@ -1,9 +1,8 @@
-
 spring:
   profiles:
-      active: dev
+    active: dev
   jpa:
-   database: MYSQL
+    database: MYSQL
 
 server:
   port: 8085
@@ -11,8 +10,9 @@ server:
 mybatis:
   typeAliasesPackage: com.aim.questionnaire.dao.entity
   mapperLocations: classpath:mapper/*.xml
-  configuration:
-    cache-enabled: true
+#  configuration:
+#    cache-enabled: true
+  config-location: classpath:mybatis/mybatis-config.xml
 
 pagehelper:
   helperDalect: mysql

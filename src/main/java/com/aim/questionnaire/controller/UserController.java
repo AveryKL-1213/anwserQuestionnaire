@@ -5,6 +5,7 @@ import com.aim.questionnaire.beans.HttpResponseEntity;
 import com.aim.questionnaire.common.Constans;
 import com.aim.questionnaire.common.utils.ExcelUtil;
 import com.aim.questionnaire.dao.entity.UserEntity;
+import com.aim.questionnaire.interceptor.Pager;
 import com.aim.questionnaire.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -61,10 +62,15 @@ public class UserController {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
 
         String username = map.get("userName").toString();
-        userEntityList = userService.queryUserByName(username);
+        int pageNum = Integer.parseInt(map.get("pageNum").toString());
+        int pageSize = Integer.parseInt(map.get("pageSize").toString());
+//        userEntityList = userService.queryUserByName(username);
+        Pager<Object> pagerUserEntity = userService.findByPager(username, pageNum, pageSize);
+        userEntityList = pagerUserEntity.getRows();
+//        System.out.println(pagerUserEntity.getTotal());
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("list", userEntityList);
-        userMap.put("total", userEntityList.size());
+        userMap.put("total", pagerUserEntity.getTotal());
         if (userEntityList.size() != 0) {
             httpResponseEntity.setData(userMap);
             httpResponseEntity.setCode(Constans.SUCCESS_CODE);

@@ -1,8 +1,8 @@
 package com.aim.questionnaire.service;
 
 import com.aim.questionnaire.dao.UserEntityMapper;
-import com.aim.questionnaire.dao.entity.ProjectEntity;
 import com.aim.questionnaire.dao.entity.UserEntity;
+import com.aim.questionnaire.interceptor.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,4 +37,15 @@ public class UserService {
         return userEntityMapper.queryUserByName(username);
     }
 
+    public Pager<Object> findByPager(String username, int page, int size) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("page", page);
+        params.put("size", size);
+        params.put("username", username);
+        Pager<Object> pager = new Pager<Object>();
+        List<Object> list = userEntityMapper.findByPager(params);
+        pager.setRows(list);
+        pager.setTotal(userEntityMapper.count(username));
+        return pager;
+    }
 }
