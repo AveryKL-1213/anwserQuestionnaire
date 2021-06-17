@@ -11,7 +11,7 @@ function login() {
         UserName.focus();
         return;
     }
-    if(!Password.value) {
+    if (!Password.value) {
         alert("请输入密码");
         Password.focus();
         return;
@@ -21,24 +21,28 @@ function login() {
     var PasswordTest = $("#Password").val();
 
     var da = {
-        "username":UserNameText,
-        "password":PasswordTest
+        "username": UserNameText,
+        "password": PasswordTest
     };
     commonAjaxPost(true, "/admin/userLogin", da, loginSuccess)
 }
 
+function faceLogin() {
+    alert("Test FaceLogin Button");
+}
+
 //登录成功回调
-function loginSuccess(result){
+function loginSuccess(result) {
     if (result.code == '666') {
-        layer.msg(result.message, {icon:1});
-        setCookie('isLogin','1');
-        setCookie('userId',result.data.id);
-        setCookie('userName',UserNameText);
-        setCookie('power',result.data.role);
-        setCookie('modelId',result.data.modelId)
+        layer.msg(result.message, {icon: 1});
+        setCookie('isLogin', '1');
+        setCookie('userId', result.data.id);
+        setCookie('userName', UserNameText);
+        setCookie('power', result.data.role);
+        setCookie('modelId', result.data.modelId)
         window.location.href = "myQuestionnaires.html"
-    }else{
-        layer.msg("此用户不存在",{icon:2});
+    } else {
+        layer.msg("此用户不存在", {icon: 2});
     }
 }
 
