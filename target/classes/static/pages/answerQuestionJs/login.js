@@ -28,7 +28,8 @@ function login() {
 }
 
 function faceLogin() {
-    alert("Test FaceLogin Button");
+    //alert("Test FaceLogin Button");
+    window.open('FaceRec.html', 'newwindow', 'height=600, width=1400, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no');
 }
 
 //登录成功回调

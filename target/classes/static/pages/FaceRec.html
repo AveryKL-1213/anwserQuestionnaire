@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人脸识别登陆</title>
+    <meta name="applicable-device" content="pc">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="../css/index.css?v=3" type="text/css">
+    <link rel="stylesheet" href="answerQuestionCss/login.css">
+</head>
+<body>
+<div id="get_face">
+    <article>
+        <style scoped>
+            video {
+                transform: scaleX(-1);
+            }
+
+            p {
+                text-align: center;
+            }
+        </style>
+        <section id="splash">
+            <p id="errorMessage">Loading...</p>
+        </section>
+        <section id="app">
+            <p>
+            <fieldset style="text-align: center; margin-top: 20px; padding: 0 50px;">
+                <video id="monitor" autoplay></video>
+                <canvas id="photo"></canvas>
+            </fieldset>
+            <p>
+                <!--            <input type=button value="&#x1F4F7;" onclick="snapshot()">-->
+            <fieldset style="text-align: center; margin-top: 30px; padding: 0 50px;">
+                <button name="SnapButton" id="SnapButton" class="submitbutton" onclick="snapshot()"
+                        onmouseover="this.className='submitbutton submitbutton_hover';"
+                        onmouseout="this.className='submitbutton';" style="color:White;">拍摄
+                </button>
+            </fieldset>
+        </section>
+        <script>
+            navigator.getUserMedia({video: true}, gotStream, noStream);
+            var video = document.getElementById('monitor');
+            var canvas = document.getElementById('photo');
+
+            function gotStream(stream) {
+                try {
+                    video.src = URL.createObjectURL(stream);
+                } catch (e) {
+                    console.log(e);
+                    video.srcObject = stream;
+                }
+
+                video.onerror = function () {
+                    stream.stop();
+                };
+                stream.onended = noStream;
+                video.onloadedmetadata = function () {
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    document.getElementById('splash').hidden = true;
+                    document.getElementById('app').hidden = false;
+                };
+            }
+
+            function noStream() {
+                document.getElementById('errorMessage').textContent = 'No camera available.';
+            }
+
+            function snapshot() {
+                canvas.getContext('2d').drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, video.videoWidth, video.videoHeight);
+                var imgData = canvas.toDataURL("image/png");
+                imgDataStr = imgData.substr(22);
+
+                var data = {
+                    "image": imgDataStr
+                };
+                commonAjaxPost(true, "/admin/faceRecLogin", data, loginSuccess);
+            }
+        </script>
+    </article>
+</div>
+</body>
+</html>
