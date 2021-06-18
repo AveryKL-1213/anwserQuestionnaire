@@ -40,9 +40,8 @@ function snapshot() {
         if (result.code == "666") {
             layer.msg("识别成功，欢迎登陆", {icon: 1});
             setTimeout(function () {
-                //将localStorage传递到哪个页面
-                location.href = 'login.html'
-                //设置localStorage
+                window.localStorage.clear();
+                location.href = 'login.html';
                 window.localStorage.setItem('code', result.code);
                 window.localStorage.setItem('id', result.data.id);
                 window.localStorage.setItem('username', result.data.username);
@@ -55,8 +54,20 @@ function snapshot() {
             }, 1000);
         } else if (result.code == "20001") {
             layer.msg("识别失败", {icon: 2});
+            // window.localStorage.clear();
+            // location.href = 'login.html';
+            window.localStorage.setItem('code', result.code);
+            // if (window.opener) {//判断是否有父窗口,即打开本页面的窗口
+            //     window.close();
+            // }
         } else {
             layer.msg(result.message, {icon: 2});
+            // window.localStorage.clear();
+            // location.href = 'login.html';
+            window.localStorage.setItem('code', result.code);
+            // if (window.opener) {//判断是否有父窗口,即打开本页面的窗口
+            //     window.close();
+            // }
         }
     });
 }

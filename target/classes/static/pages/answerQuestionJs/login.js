@@ -37,8 +37,11 @@ function faceLogin() {
 var loop = setInterval(function () {//监听子页面关闭事件,轮询时间100毫秒
     if (windowsOpen.closed) {
         clearInterval(loop);
-        layer.msg("登陆中···", {icon: 0});
         faceRecLoginSuccess();
+        if (window.localStorage.getItem("code") !== "666") {
+            window.location.href = "login.html";
+        }
+        window.localStorage.clear();
     }
 }, 100);
 
@@ -61,21 +64,23 @@ function loginSuccess(result) {
 //登录成功回调
 function faceRecLoginSuccess() {
     var code = window.localStorage.getItem("code");
-    var id = window.localStorage.getItem("id");
-    var userName = window.localStorage.getItem("username");
-    var role = window.localStorage.getItem("role");
-    var modelId = window.localStorage.getItem("modelId");
-    var message = window.localStorage.getItem("message");
     if (code == '666') {
+        var id = window.localStorage.getItem("id");
+        var userName = window.localStorage.getItem("username");
+        var role = window.localStorage.getItem("role");
+        var modelId = window.localStorage.getItem("modelId");
+        var message = window.localStorage.getItem("message");
         layer.msg(message, {icon: 1});
         setCookie('isLogin', '1');
         setCookie('userId', id);
         setCookie('userName', userName);
         setCookie('power', role);
         setCookie('modelId', modelId)
-        window.location.href = "myQuestionnaires.html"
+        window.location.href = "myQuestionnaires.html";
     } else {
-        layer.msg("此用户不存在", {icon: 2});
+        layer.msg("人脸登陆失败", {icon: 2});
+        window.localStorage.clear();
+        window.location.href = "login.html";
     }
 }
 
