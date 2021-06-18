@@ -4,11 +4,14 @@ package com.aim.questionnaire.controller;
 import com.aim.questionnaire.beans.HttpResponseEntity;
 import com.aim.questionnaire.common.Constans;
 import com.aim.questionnaire.common.utils.ExcelUtil;
+import com.aim.questionnaire.common.utils.FaceSpot;
 import com.aim.questionnaire.dao.entity.UserEntity;
 import com.aim.questionnaire.interceptor.Pager;
 import com.aim.questionnaire.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,10 +54,30 @@ public class UserController {
     public HttpResponseEntity faceRecLogin(@RequestBody Map<String, Object> map) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         String imgData = map.get("image").toString();
-        UserEntity admin = userService.selectAllByName("admin");
-        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
-        httpResponseEntity.setMessage("登陆成功");
-        httpResponseEntity.setData(admin);
+        UserEntity user = null;
+        try {
+            JSONObject js = FaceSpot.searchFace(imgData, "Admin", "admin");//调用工具类人脸查询方法（工具类下面）
+            //如果有人脸匹配，返回数据，并对数据进行处理
+            JSONObject js_result = (JSONObject) js.get("result");
+            JSONArray js_arr = js_result.getJSONArray("user_list");
+            String str = js_arr.getJSONObject(0).get("score").toString();
+            String s = str.substring(0, str.indexOf("."));
+            if (Integer.parseInt(s) >= 90) {
+                String username = js_arr.getJSONObject(0).get("user_id").toString();
+                user = userService.selectAllByName(username);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (user != null) {
+            httpResponseEntity.setData(user);
+            httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+            httpResponseEntity.setMessage("登陆成功");
+        } else {
+            httpResponseEntity.setData(null);
+            httpResponseEntity.setCode(Constans.EXIST_CODE);
+            httpResponseEntity.setMessage("识别失败");
+        }
         return httpResponseEntity;
     }
 

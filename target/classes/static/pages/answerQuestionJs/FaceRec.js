@@ -53,7 +53,7 @@ function snapshot() {
                     window.close();
                 }
             }, 1000);
-        } else if (result.code == "333") {
+        } else if (result.code == "20001") {
             layer.msg("识别失败", {icon: 2});
         } else {
             layer.msg(result.message, {icon: 2});
