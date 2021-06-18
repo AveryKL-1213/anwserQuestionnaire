@@ -38,47 +38,13 @@
                 </button>
             </fieldset>
         </section>
-        <script>
-            navigator.getUserMedia({video: true}, gotStream, noStream);
-            var video = document.getElementById('monitor');
-            var canvas = document.getElementById('photo');
-
-            function gotStream(stream) {
-                try {
-                    video.src = URL.createObjectURL(stream);
-                } catch (e) {
-                    console.log(e);
-                    video.srcObject = stream;
-                }
-
-                video.onerror = function () {
-                    stream.stop();
-                };
-                stream.onended = noStream;
-                video.onloadedmetadata = function () {
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-                    document.getElementById('splash').hidden = true;
-                    document.getElementById('app').hidden = false;
-                };
-            }
-
-            function noStream() {
-                document.getElementById('errorMessage').textContent = 'No camera available.';
-            }
-
-            function snapshot() {
-                canvas.getContext('2d').drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, video.videoWidth, video.videoHeight);
-                var imgData = canvas.toDataURL("image/png");
-                imgDataStr = imgData.substr(22);
-
-                var data = {
-                    "image": imgDataStr
-                };
-                commonAjaxPost(true, "/admin/faceRecLogin", data, loginSuccess);
-            }
-        </script>
     </article>
 </div>
+<script src="../plugins/jQuery/jquery-1.12.4.min.js"></script>
+<script src="../js/zhezhao.js?v=3" type="text/javascript"></script>
+<script src="../plugins/layer/layer.js"></script>
+<script src="../plugins/cookie/jquery.cookie.js"></script>
+<script src="../common/common.js"></script>
+<script src="answerQuestionJs/FaceRec.js"></script>
 </body>
 </html>

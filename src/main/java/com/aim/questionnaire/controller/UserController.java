@@ -47,6 +47,17 @@ public class UserController {
         return httpResponseEntity;
     }
 
+    @RequestMapping(value = "/faceRecLogin", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity faceRecLogin(@RequestBody Map<String, Object> map) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        String imgData = map.get("image").toString();
+        UserEntity admin = userService.selectAllByName("admin");
+        httpResponseEntity.setCode(Constans.SUCCESS_CODE);
+        httpResponseEntity.setMessage("登陆成功");
+        httpResponseEntity.setData(admin);
+        return httpResponseEntity;
+    }
+
     @RequestMapping(value = "/addUserInfo", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity addUserInfo(@RequestBody UserEntity userEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
